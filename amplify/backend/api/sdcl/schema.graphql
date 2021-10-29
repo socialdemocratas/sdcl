@@ -1,0 +1,43 @@
+type Evento @model @auth(rules: [{allow: public}]) @key(name: "byEspacio", fields: ["espacioID"]) {
+  id: ID!
+  titulo: String
+  cuerpo: String
+  online: Boolean
+  direccion: String
+  direccionURL: AWSURL
+  comentSys: String
+  espacioID: ID
+}
+
+type EleccionOpcion @model @auth(rules: [{allow: public}]) @key(name: "byEleccion", fields: ["eleccionID"]) {
+  id: ID!
+  etiqueta: String
+  valor: String
+  eleccionID: ID
+}
+
+type Eleccion @model @auth(rules: [{allow: public}]) @key(name: "byEspacio", fields: ["espacioID"]) {
+  id: ID!
+  titulo: String
+  cuerpo: String
+  comentSys: String
+  espacioID: ID
+  EleccionOpcions: [EleccionOpcion] @connection(keyName: "byEleccion", fields: ["id"])
+}
+
+type Post @model @auth(rules: [{allow: public}]) @key(name: "byEspacio", fields: ["espacioID"]) {
+  id: ID!
+  espacioID: ID
+  titulo: String
+  cuerpo: String
+  comentSys: String
+}
+
+type Espacio @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  nombre: String!
+  untitledfield: String
+  Posts: [Post] @connection(keyName: "byEspacio", fields: ["id"])
+  Eleccions: [Eleccion] @connection(keyName: "byEspacio", fields: ["id"])
+  Eventos: [Evento] @connection(keyName: "byEspacio", fields: ["id"])
+}

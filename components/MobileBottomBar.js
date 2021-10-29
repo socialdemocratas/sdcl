@@ -13,6 +13,8 @@ import WorkspacesOutlinedIcon from '@mui/icons-material/WorkspacesOutlined';
 import WorkspacesIcon from '@mui/icons-material/Workspaces';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import EditIcon from '@mui/icons-material/Edit';
+import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 
 
 import Tabs from '@mui/material/Tabs';
@@ -28,7 +30,12 @@ import { useTheme, styled } from '@mui/material/styles';
 
 import { useRouter } from 'next/router'
 
-import { FormatQuoteOpen, FormatQuoteOpenOutline } from './extraIcons'
+import { 
+    FormatQuoteOpen, 
+    FormatQuoteOpenOutline,
+    FileCabinet,
+    GraphOutline
+} from './extraIcons'
 
 
 const StyledTab = styled((props) => <Tab {...props} />)(
@@ -54,7 +61,8 @@ export default function MobileBottomBar({ }) {
     const [value, setValue] = React.useState();
     const router = useRouter();
 
-    const appSection = router.pathname.split('/')[1];
+    const pathnameSplit = router.pathname.split('/')
+    const appSection = pathnameSplit[1];
     React.useEffect(() => {
         setValue(appSection);
     }, [appSection])
@@ -75,6 +83,37 @@ export default function MobileBottomBar({ }) {
               </Tabs>
               </>
             }
+
+            {
+                value === 'tramites' && pathnameSplit[2] !== 'visor' &&
+                <Tabs sx={{
+                    '& .MuiTabs-indicator': { top: 0, bottom: 'initial'}
+                }} value={espacioSection} onChange={(event, newValue) => { setEspacioSection(newValue)}}  aria-label="Menú de la central de trámites" centered={true}>
+                    <StyledTab label={<Box sx={{display: "flex", flexDirection: 'row'}}><FileCabinet fontSize={'small'} /><Typography sx={{flex:1, fontSize: 'small', textTransform: 'none'}}> Catálogo</Typography></Box>} />
+                    <StyledTab label={<Box sx={{display: "flex", flexDirection: 'row'}}><FileDownloadOutlinedIcon fontSize={'small'} /><Typography variant={'caption'} sx={{flex:1, fontSize: 'small', textTransform: 'none'}}> Entrantes</Typography></Box>} />
+                    <StyledTab label={<Box sx={{display: "flex", flexDirection: 'row'}}><FileUploadOutlinedIcon fontSize={'small'} /><Typography variant={'caption'} sx={{flex:1, fontSize: 'small', textTransform: 'none'}}> Salients</Typography></Box>} />
+                </Tabs>
+            }
+
+            {
+                value === 'tramites' && pathnameSplit[2] === 'visor' &&
+                <Tabs sx={{
+                        '& .MuiTabs-indicator': { top: 0, bottom: 'initial'}
+                    }} value={espacioSection} 
+                    onChange={(event, newValue) => { setEspacioSection(newValue)}}  
+                    aria-label="Menú de la central de trámites"
+                    variant="scrollable"
+                >
+                    <StyledTab label={<Box sx={{display: "flex", flexDirection: 'row'}}><GraphOutline fontSize={'small'} /><Typography sx={{flex:1, fontSize: 'small', textTransform: 'none'}}> General</Typography></Box>} />
+                    <StyledTab label={<Box sx={{display: "flex", flexDirection: 'row'}}><Typography variant={'caption'} sx={{flex:1, fontSize: 'small', textTransform: 'none'}}>A</Typography></Box>} />
+                    <StyledTab label={<Box sx={{display: "flex", flexDirection: 'row'}}><Typography variant={'caption'} sx={{flex:1, fontSize: 'small', textTransform: 'none'}}>B</Typography></Box>} />
+                    <StyledTab label={<Box sx={{display: "flex", flexDirection: 'row'}}><Typography variant={'caption'} sx={{flex:1, fontSize: 'small', textTransform: 'none'}}>C</Typography></Box>} />
+                    <StyledTab label={<Box sx={{display: "flex", flexDirection: 'row'}}><Typography variant={'caption'} sx={{flex:1, fontSize: 'small', textTransform: 'none'}}>D</Typography></Box>} />
+                    <StyledTab label={<Box sx={{display: "flex", flexDirection: 'row'}}><Typography variant={'caption'} sx={{flex:1, fontSize: 'small', textTransform: 'none'}}>E</Typography></Box>} />
+                    <StyledTab label={<Box sx={{display: "flex", flexDirection: 'row'}}><Typography variant={'caption'} sx={{flex:1, fontSize: 'small', textTransform: 'none'}}>F</Typography></Box>} />
+                </Tabs>
+            }
+
             <BottomNavigation
                 showLabels={false}
                 value={value}

@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }) {
 
   return <>
     <Head>
-      <meta charset="UTF-8" />
+      <meta charSet="UTF-8" />
       <title>{title} - SDCL</title>
       <meta name="description" content="Socialdemócratas de Chile" />
       <meta name="viewport" content="initial-scale=1, width=device-width" />
