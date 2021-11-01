@@ -39,7 +39,6 @@ export default function Tramites({ setTitle }) {
                 height: '30px',
                 textAlign: 'center',
                 borderRadius: '8px 22px 0 0',
-                zIndex: 2,
                 marginBottom: '-3px',
                 position: 'relative'
             }}><Typography variant="caption">{item.id}</Typography></Box>

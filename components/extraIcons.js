@@ -5,7 +5,8 @@ import {
     mdiFormatQuoteOpenOutline,
     mdiDotsGrid,
     mdiFileCabinet,
-    mdiGraphOutline
+    mdiGraphOutline,
+    mdiInformationVariant
 } from '@mdi/js';
 
 import { createSvgIcon } from '@mui/material/utils';
@@ -15,3 +16,4 @@ export const FormatQuoteOpenOutline = createSvgIcon(<path d={mdiFormatQuoteOpenO
 export const DotsGrid = createSvgIcon(<path d={mdiDotsGrid} />, 'DotsGrid');
 export const FileCabinet = createSvgIcon(<path d={mdiFileCabinet} />, 'FileCabinet');
 export const GraphOutline = createSvgIcon(<path d={mdiGraphOutline} />, 'GraphOutline');
+export const InformationVariant = createSvgIcon(<path d={mdiInformationVariant} />, 'InformationVariant');

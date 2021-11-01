@@ -6,7 +6,9 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import EventOutlinedIcon from '@mui/icons-material/EventOutlined';
+import EventIcon from '@mui/icons-material/Event';
 import HowToVoteOutlinedIcon from '@mui/icons-material/HowToVoteOutlined';
+import HowToVoteIcon from '@mui/icons-material/HowToVote';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
 import WorkspacesOutlinedIcon from '@mui/icons-material/WorkspacesOutlined';
@@ -15,6 +17,11 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import EditIcon from '@mui/icons-material/Edit';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
+import GroupsIcon from '@mui/icons-material/Groups';
+import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
+import StickyNote2Icon from '@mui/icons-material/StickyNote2';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 
 import Tabs from '@mui/material/Tabs';
@@ -34,7 +41,8 @@ import {
     FormatQuoteOpen, 
     FormatQuoteOpenOutline,
     FileCabinet,
-    GraphOutline
+    GraphOutline,
+    InformationVariant
 } from './extraIcons'
 
 
@@ -72,14 +80,22 @@ export default function MobileBottomBar({ }) {
     return (
         <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, backgroundColor: theme.palette.bg.main }} elevation={2}>
             {
-                value === 'espacios' && <>
+                value === 'colaboremos' && <>
             <Tabs sx={{
                 '& .MuiTabs-indicator': { top: 0, bottom: 'initial'}
             }} value={espacioSection} onChange={(event, newValue) => { setEspacioSection(newValue)}}  aria-label="Menú del espacio seleccionado" centered={true}>
-                <StyledTab label={<Box sx={{display: "flex", flexDirection: 'row'}}><DashboardOutlinedIcon fontSize={'small'} /><Typography sx={{flex:1, fontSize: 'small', textTransform: 'none'}}> Mural</Typography></Box>} />
-                <StyledTab label={<Box sx={{display: "flex", flexDirection: 'row'}}><EventOutlinedIcon fontSize={'small'} /><Typography variant={'caption'} sx={{flex:1, fontSize: 'small', textTransform: 'none'}}> Eventos</Typography></Box>} />
-                <StyledTab label={<Box sx={{display: "flex", flexDirection: 'row'}}><HowToVoteOutlinedIcon fontSize={'small'} /><Typography variant={'caption'} sx={{flex:1, fontSize: 'small', textTransform: 'none'}}> Votaciones</Typography></Box>} />
-                <StyledTab label={<Box sx={{display: "flex", flexDirection: 'row'}}><AssessmentOutlinedIcon fontSize={'small'} /><Typography variant={'caption'} sx={{flex:1, fontSize: 'small', textTransform: 'none'}}> Info</Typography></Box>} />
+                <StyledTab label={<Box sx={{display: "flex", flexDirection: 'row'}}>{
+                    espacioSection != 0 ? <DashboardOutlinedIcon fontSize={'small'} />: <DashboardIcon fontSize={'small'} />
+                }<Typography sx={{flex:1, fontSize: 'small', textTransform: 'none'}}> Mural</Typography></Box>} />
+                <StyledTab label={<Box sx={{display: "flex", flexDirection: 'row'}}>{
+                    espacioSection != 1 ? <EventOutlinedIcon fontSize={'small'} /> : <EventIcon fontSize={'small'} /> 
+                }<Typography variant={'caption'} sx={{flex:1, fontSize: 'small', textTransform: 'none'}}> Eventos</Typography></Box>} />
+                <StyledTab label={<Box sx={{display: "flex", flexDirection: 'row'}}>{
+                    espacioSection != 2 ? <HowToVoteOutlinedIcon fontSize={'small'} /> : <HowToVoteIcon fontSize={'small'} />
+                }<Typography variant={'caption'} sx={{flex:1, fontSize: 'small', textTransform: 'none'}}> Votaciones</Typography></Box>} />
+                <StyledTab label={<Box sx={{display: "flex", flexDirection: 'row'}}>{
+                espacioSection != '3' ? <StickyNote2OutlinedIcon fontSize={'small'} /> : <StickyNote2Icon fontSize={'small'} />
+                }<Typography variant={'caption'} sx={{flex:1, fontSize: 'small', textTransform: 'none'}}> Tareas</Typography></Box>} />
               </Tabs>
               </>
             }
@@ -123,10 +139,11 @@ export default function MobileBottomBar({ }) {
                 }}
             >
                 <BottomNavigationAction value={'vozsd'} icon={value == 'vozsd' ? <FormatQuoteOpen /> : <FormatQuoteOpenOutline />} />
-                <BottomNavigationAction showLabel={false} sx={{ selected: { color: theme.palette.navSelected.main } }} value={'espacios'} icon={value == 'espacios' ? <WorkspacesIcon /> : <WorkspacesOutlinedIcon />} />
-                <BottomNavigationAction value={'tramites'} icon={value == 'tramites' ? <EditIcon /> : <EditOutlinedIcon />} />
-                <BottomNavigationAction value={''} icon={<Isotype variant={value == '' ? 'default' : 'outline'}
-                    color={value == '' ? theme.palette.primary.main : theme.palette.text.secondary} />} />
+                <BottomNavigationAction value={'colaboremos'} icon={<Isotype variant={value == 'colaboremos' ? 'default' : 'outline'}
+                    color={value == 'colaboremos' ? theme.palette.primary.main : theme.palette.text.secondary} />} />
+                {false && <BottomNavigationAction showLabel={false} sx={{ selected: { color: theme.palette.navSelected.main } }} value={'espacios'} icon={value == 'espacios' ? <GroupsIcon /> : <GroupsOutlinedIcon />} />}
+                {false && <BottomNavigationAction value={'tramites'} icon={value == 'tramites' ? <EditIcon /> : <EditOutlinedIcon />} />}
+                <BottomNavigationAction value={''} icon={<InformationVariant />} />
             </BottomNavigation>
         </Paper>
     );
