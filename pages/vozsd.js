@@ -1,8 +1,21 @@
+import { useEffect  } from "react"
 import { Typography } from "@mui/material"
+import Layout from "../components/Layout"
 
-export default function VozSD({ setTitle }) {
-    setTitle('Voz SD')
-    return <>
-        <Typography h2>Voz SD</Typography>
-    </>
+function VozSD() {
+
+  return (
+    <div >
+      <Typography variant="h1">Voz SD</Typography>
+    </div>
+  )
 }
+
+VozSD.getLayout = (page) =>
+  <Layout
+    title="Voz SD"
+  >
+    {page}
+  </Layout>
+
+export default VozSD;

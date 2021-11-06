@@ -2,10 +2,10 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box'
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-import { createTheme, ThemeProvider, styled, responsiveFontSizes, useTheme } from '@mui/material/styles';
+import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import Head from 'next/head'
-import Header from '../components/Header'
-import MobileBottomBar from '../components/MobileBottomBar';
+import Header from './Header'
+import MobileBottomBar from './MobileBottomBar';
 import React from 'react';
 
 const theme = responsiveFontSizes(createTheme({
@@ -14,8 +14,7 @@ const theme = responsiveFontSizes(createTheme({
       main: '#e62154'
     },
     bg: {
-      main: '#F9FFFF',
-      //clear: '#F9FFFF'
+      main: '#F3FFFF'
     },
     navSelected: {
       main: '#262626'
@@ -27,15 +26,9 @@ const theme = responsiveFontSizes(createTheme({
   },
 }), { factor: 2.5 });
 
-function MyApp({ Component, pageProps }) {
-  //const isSmall = useMediaQuery(theme.breakpoints.down('md'));
-  //const [title, setTitle] = React.useState('...');
-  //const [tabs, setTabs] = React.useState()
-
-  const getLayout = Component.getLayout || ((page) => page)
-
-  return getLayout(<Component {...pageProps} />)
-
+export default function Layout({ title, tabs, children }) {
+  const isSmall = useMediaQuery(theme.breakpoints.down('md'));
+  console.log('tabs', tabs, isSmall)
   return <>
     <Head>
       <meta charSet="UTF-8" />
@@ -52,11 +45,9 @@ function MyApp({ Component, pageProps }) {
     <Box>
       <ThemeProvider theme={theme}>
         <Header title={title} />
-        <Component setTitle={setTitle} setTabs={setTabs} {...pageProps} />
+        {children}
         {isSmall && <MobileBottomBar>{tabs}</MobileBottomBar>}
       </ThemeProvider>
     </Box>
   </>
 }
-
-export default MyApp

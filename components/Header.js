@@ -24,7 +24,7 @@ export default function Header({ title }) {
             >
               <Isotype style={{ width: '32px', height: '32px' }} color={theme.palette.primary.main} />
             </IconButton></Link>
-            <Typography variant="h6" component="h1" sx={{ flexGrow_: 1 }}>{title ? title:  <Skeleton />}</Typography>
+            <Typography variant="h6" component="h1" sx={{ flexGrow_: 1 }}>{!!title ? title:  <Skeleton />}</Typography>
             <Button>Ingresar</Button>
         </Toolbar>
     </AppBar>

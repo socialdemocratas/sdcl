@@ -1,85 +1,51 @@
 import * as React from 'react';
-
 import Isotype from './Isotype'
-
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
-import EventOutlinedIcon from '@mui/icons-material/EventOutlined';
-import EventIcon from '@mui/icons-material/Event';
-import HowToVoteOutlinedIcon from '@mui/icons-material/HowToVoteOutlined';
-import HowToVoteIcon from '@mui/icons-material/HowToVote';
-import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
-import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
-import WorkspacesOutlinedIcon from '@mui/icons-material/WorkspacesOutlined';
-import WorkspacesIcon from '@mui/icons-material/Workspaces';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import EditIcon from '@mui/icons-material/Edit';
-import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
-import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
-import GroupsIcon from '@mui/icons-material/Groups';
-import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
-import StickyNote2Icon from '@mui/icons-material/StickyNote2';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-
-
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import { 
     Paper,
-    Button
+    BottomNavigation,
+    BottomNavigationAction
 } from '@mui/material';
-import { useTheme, styled } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 
-
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { 
     FormatQuoteOpen, 
     FormatQuoteOpenOutline,
-    FileCabinet,
-    GraphOutline,
     InformationVariant
-} from './extraIcons'
+} from './extraIcons';
 
-
-const StyledTab = styled((props) => <Tab {...props} />)(
-    ({ theme }) => ({
-      //textTransform: 'none',
-      //fontWeight: theme.typography.fontWeightRegular,
-      fontSize: theme.typography.pxToRem(8),
-      letterSpacing: 0,
-      //minWidth: '50px',
-      //marginRight: theme.spacing(1),
-      /*color: 'rgba(255, 255, 255, 0.7)',
-      '&.Mui-selected': {
-        color: '#fff',
-      },
-      '&.Mui-focusVisible': {
-        backgroundColor: 'rgba(100, 95, 228, 0.32)',
-      },*/
-    }),
-  );
-
-export default function MobileBottomBar({ }) {
+export default function MobileBottomBar({ children }) {
     const theme = useTheme()
-    const [value, setValue] = React.useState();
     const router = useRouter();
-
     const pathnameSplit = router.pathname.split('/')
     const appSection = pathnameSplit[1];
-    React.useEffect(() => {
-        setValue(appSection);
-    }, [appSection])
-
-    const [espacioSection, setEspacioSection] = React.useState(0)
-
+    console.log('children', children)
     return (
-        <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, backgroundColor: theme.palette.bg.main }} elevation={2}>
-            {
+        <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, backgroundColor: theme.palette.bg.main }} elevation={1}>
+            {children}
+            <BottomNavigation
+                showLabels={false}
+                value={appSection}
+                sx={{ backgroundColor: 'transparent' }}
+                onChange={(_, value)=> router.push(`/${value}`)}
+            >
+                <BottomNavigationAction value={'vozsd'} icon={appSection == 'vozsd' ? <FormatQuoteOpen /> : <FormatQuoteOpenOutline />}
+                    color={appSection == 'vozsd' ? '#33333' : theme.palette.text.secondary} 
+                />
+                <BottomNavigationAction value={'grupos'} icon={<Isotype variant={appSection == 'grupos' ? 'default' : 'outline'}
+                    color={appSection == 'grupos' ? theme.palette.primary.main : theme.palette.text.secondary} />}
+                />
+                <BottomNavigationAction value={''} icon={<InformationVariant />} />
+            </BottomNavigation>
+        </Paper>
+    );
+}
+
+
+/**
+ {
                 value === 'colaboremos' && <>
             <Tabs sx={{
                 '& .MuiTabs-indicator': { top: 0, bottom: 'initial'}
@@ -129,22 +95,4 @@ export default function MobileBottomBar({ }) {
                     <StyledTab label={<Box sx={{display: "flex", flexDirection: 'row'}}><Typography variant={'caption'} sx={{flex:1, fontSize: 'small', textTransform: 'none'}}>F</Typography></Box>} />
                 </Tabs>
             }
-
-            <BottomNavigation
-                showLabels={false}
-                value={value}
-                sx={{ backgroundColor: theme.palette.bg.main }}
-                onChange={(event, newValue) => {
-                    router.push(`/${newValue}`)
-                }}
-            >
-                <BottomNavigationAction value={'vozsd'} icon={value == 'vozsd' ? <FormatQuoteOpen /> : <FormatQuoteOpenOutline />} />
-                <BottomNavigationAction value={'colaboremos'} icon={<Isotype variant={value == 'colaboremos' ? 'default' : 'outline'}
-                    color={value == 'colaboremos' ? theme.palette.primary.main : theme.palette.text.secondary} />} />
-                {false && <BottomNavigationAction showLabel={false} sx={{ selected: { color: theme.palette.navSelected.main } }} value={'espacios'} icon={value == 'espacios' ? <GroupsIcon /> : <GroupsOutlinedIcon />} />}
-                {false && <BottomNavigationAction value={'tramites'} icon={value == 'tramites' ? <EditIcon /> : <EditOutlinedIcon />} />}
-                <BottomNavigationAction value={''} icon={<InformationVariant />} />
-            </BottomNavigation>
-        </Paper>
-    );
-}
+ */
