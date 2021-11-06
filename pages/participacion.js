@@ -58,15 +58,14 @@ function TabPanel(props) {
   );
 }
 
-export default function Participacion({ setTitle, setTabs }) {
+export default function Participacion({  }) {
 
-  setTitle('Socialdemócratas de Chile')
   const theme = useTheme();
 
   const [tabIndex, setTabIndex] = useState(0);
 
   const mock = [...Array(50).keys()]
-
+/*
   useEffect(() => {
     setTabs(<Tabs sx={{
         '& .MuiTabs-indicator': { top: 0, bottom: 'initial'}
@@ -93,7 +92,7 @@ export default function Participacion({ setTitle, setTabs }) {
     </Tabs>)
     return () => setTabs(null)
   }, [tabIndex])
-
+*/
   return (
     <Box>
       <Paper elevation={0} sx={{ position: 'sticky', top: 0 }}>

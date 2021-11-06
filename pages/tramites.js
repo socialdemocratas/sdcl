@@ -27,8 +27,7 @@ const mock = [{
     who: 'Tener una cuenta'
 }]
 
-export default function Tramites({ setTitle }) {
-    setTitle('Central de Trámites')
+export default function Tramites({  }) {
     return <Container>
         <Typography h2>Trámites</Typography>
         <Grid container spacing={3}>

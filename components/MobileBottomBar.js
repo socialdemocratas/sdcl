@@ -31,13 +31,13 @@ export default function MobileBottomBar({ children }) {
                 sx={{ backgroundColor: 'transparent' }}
                 onChange={(_, value)=> router.push(`/${value}`)}
             >
-                <BottomNavigationAction value={'vozsd'} icon={appSection == 'vozsd' ? <FormatQuoteOpen /> : <FormatQuoteOpenOutline />}
+                <BottomNavigationAction disableRipple value={'vozsd'} icon={appSection == 'vozsd' ? <FormatQuoteOpen /> : <FormatQuoteOpenOutline />}
                     color={appSection == 'vozsd' ? '#33333' : theme.palette.text.secondary} 
                 />
-                <BottomNavigationAction value={'grupos'} icon={<Isotype variant={appSection == 'grupos' ? 'default' : 'outline'}
+                <BottomNavigationAction disableRipple value={'grupos'} icon={<Isotype variant={appSection == 'grupos' ? 'default' : 'outline'}
                     color={appSection == 'grupos' ? theme.palette.primary.main : theme.palette.text.secondary} />}
                 />
-                <BottomNavigationAction value={''} icon={<InformationVariant />} />
+                <BottomNavigationAction disableRipple value={''} icon={<InformationVariant />} />
             </BottomNavigation>
         </Paper>
     );

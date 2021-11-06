@@ -5,8 +5,7 @@ import {
     CardContent
 } from "@mui/material"
 
-export default function Tramites({ setTitle }) {
-    setTitle('Visor de trámites')
+export default function Tramites({  }) {
     return <Container>
         <Typography variant="h2">Editando el trámite</Typography>
         <Card>

@@ -3,8 +3,7 @@ import {
     Button
 } from "@mui/material"
 
-export default function Espacios({ setTitle }) {
-    setTitle('Espacios SD')
+export default function Espacios({  }) {
 
     return <>
         <Button variant="outlined" color="navSelected" size="large" sx={{ borderRadius: 30, textTransform: 'none', margin: '8px', width: 'calc(100% - 16px)', position: 'sticky', top: '8px', backgroundColor: '#fff' }}>Comunal San Miguel</Button>
