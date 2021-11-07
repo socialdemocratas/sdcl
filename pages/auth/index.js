@@ -1,7 +1,7 @@
 import { useEffect  } from "react"
 import { Typography } from "@mui/material"
-import Layout from "../components/Layout"
-import Tabs from "../components/HomeMobileTabs"
+import Layout from "../../components/Layout"
+import Tabs from "../../components/AccountUnloggedMobileTabs"
 
 function Home() {
 
@@ -14,7 +14,7 @@ function Home() {
 
 Home.getLayout = (page) =>
   <Layout 
-    title="Socialdemócratas de Chile"
+    title="Unirme"
     tabs={<Tabs />}
   >
     {page}

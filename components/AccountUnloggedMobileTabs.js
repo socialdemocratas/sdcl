@@ -9,14 +9,15 @@ import {
 } from "@mui/material"
 import { useTheme, styled } from '@mui/material/styles'
 
-import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
-import EventOutlinedIcon from '@mui/icons-material/EventOutlined';
-import EventIcon from '@mui/icons-material/Event';
-import HowToVoteOutlinedIcon from '@mui/icons-material/HowToVoteOutlined';
-import HowToVoteIcon from '@mui/icons-material/HowToVote';
-import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
-import StickyNote2Icon from '@mui/icons-material/StickyNote2';
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import LoginIcon from '@mui/icons-material/Login';
+
+import {
+  BookOpenPageVariant,
+  BookOpenPageVariantOutline,
+  Abacus,
+  AccountPlus,
+  AccountPlusOutline
+} from './extraIcons'
 
 
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
@@ -33,7 +34,7 @@ export default function Tabs_({ }) {
 
   const router = useRouter();
   const pathnameSplit = router.pathname.split('/')
-  const groupsSection = pathnameSplit[2] || "";
+  const homeSection = pathnameSplit[1] || "";
   const theme = useTheme();
 
   console.log('groupsSection', )
@@ -41,7 +42,7 @@ export default function Tabs_({ }) {
   return (
     <>
     <Tabs
-      value={groupsSection}
+      value={homeSection}
       centered
       sx={{
         '& .MuiTabs-indicator': {
@@ -52,21 +53,14 @@ export default function Tabs_({ }) {
           borderRadius: '50px'
         }
       }}
-      onChange={(_, value)=> router.push(`/grupos/${value}`)}
+      onChange={(_, value)=> router.push(`/${value}`)}
       aria-label="icon position tabs example"
     >
         <StyledTab value="" icon={
-          groupsSection != "" ? <DashboardOutlinedIcon fontSize={'small'} />: <DashboardIcon fontSize={'small'} />
-        } iconPosition="start" label="Mural" />
-        <StyledTab value="eventos" icon={
-          groupsSection != "eventos" ? <EventOutlinedIcon fontSize={'small'} /> : <EventIcon fontSize={'small'} /> 
-        } iconPosition="start" label="Eventos" />
-        <StyledTab value="votaciones" icon={
-          groupsSection != "votaciones" ? <HowToVoteOutlinedIcon fontSize={'small'} /> : <HowToVoteIcon fontSize={'small'} />
-        } iconPosition="start" label="Votaciones" />
-        <StyledTab value="tareas" icon={
-          groupsSection != "tareas" ? <StickyNote2OutlinedIcon fontSize={'small'} /> : <StickyNote2Icon fontSize={'small'} /> 
-        } iconPosition="start" label="Tareas" />
+          homeSection != "" ? <AccountPlusOutline fontSize={'small'} />: <AccountPlus fontSize={'small'} />
+        } iconPosition="start" label="Crear cuenta" />
+        <StyledTab value="login" icon={<LoginIcon fontSize={'small'} />} 
+        iconPosition="start" label="Iniciar Sesión" />
     </Tabs>
     
   </>

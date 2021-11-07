@@ -18,6 +18,15 @@ import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
 import StickyNote2Icon from '@mui/icons-material/StickyNote2';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 
+import {
+  BookOpenPageVariant,
+  BookOpenPageVariantOutline,
+  Abacus,
+  Bookshelf,
+  Notebook,
+  NotebookOutline
+} from './extraIcons'
+
 
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
   ({ theme }) => ({
@@ -33,7 +42,7 @@ export default function Tabs_({ }) {
 
   const router = useRouter();
   const pathnameSplit = router.pathname.split('/')
-  const groupsSection = pathnameSplit[2] || "";
+  const homeSection = pathnameSplit[1] || "";
   const theme = useTheme();
 
   console.log('groupsSection', )
@@ -41,7 +50,7 @@ export default function Tabs_({ }) {
   return (
     <>
     <Tabs
-      value={groupsSection}
+      value={homeSection}
       centered
       sx={{
         '& .MuiTabs-indicator': {
@@ -52,21 +61,18 @@ export default function Tabs_({ }) {
           borderRadius: '50px'
         }
       }}
-      onChange={(_, value)=> router.push(`/grupos/${value}`)}
+      onChange={(_, value)=> router.push(`/${value}`)}
       aria-label="icon position tabs example"
     >
         <StyledTab value="" icon={
-          groupsSection != "" ? <DashboardOutlinedIcon fontSize={'small'} />: <DashboardIcon fontSize={'small'} />
-        } iconPosition="start" label="Mural" />
-        <StyledTab value="eventos" icon={
-          groupsSection != "eventos" ? <EventOutlinedIcon fontSize={'small'} /> : <EventIcon fontSize={'small'} /> 
-        } iconPosition="start" label="Eventos" />
-        <StyledTab value="votaciones" icon={
-          groupsSection != "votaciones" ? <HowToVoteOutlinedIcon fontSize={'small'} /> : <HowToVoteIcon fontSize={'small'} />
-        } iconPosition="start" label="Votaciones" />
-        <StyledTab value="tareas" icon={
-          groupsSection != "tareas" ? <StickyNote2OutlinedIcon fontSize={'small'} /> : <StickyNote2Icon fontSize={'small'} /> 
-        } iconPosition="start" label="Tareas" />
+          homeSection != "" ? <BookOpenPageVariantOutline fontSize={'small'} />: <BookOpenPageVariant fontSize={'small'} />
+        } iconPosition="start" label="Información" />
+        <StyledTab value="transparencia" icon={<Abacus fontSize={'small'} />} 
+        iconPosition="start" label="Transparencia" />
+        <StyledTab value="manuales" icon={
+          homeSection != "manuales" ? <NotebookOutline fontSize={'small'} />: <Notebook fontSize={'small'} />
+        } 
+        iconPosition="start" label="Manuales" />
     </Tabs>
     
   </>

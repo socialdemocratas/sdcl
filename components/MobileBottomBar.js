@@ -10,18 +10,21 @@ import { useTheme } from '@mui/material/styles';
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { 
-    FormatQuoteOpen, 
-    FormatQuoteOpenOutline,
-    InformationVariant
+    Bookshelf,
+    InformationVariant,
 } from './extraIcons';
 
 export default function MobileBottomBar({ children }) {
     const theme = useTheme()
     const router = useRouter();
+    const account = false; // todo
     const pathnameSplit = router.pathname.split('/')
     const appSection = pathnameSplit[1];
-    console.log('children', children)
+    if(appSection == 'transparencia' || appSection == 'manuales') {
+        appSection = ''
+    }
     return (
         <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, backgroundColor: theme.palette.bg.main }} elevation={1}>
             {children}
@@ -31,13 +34,11 @@ export default function MobileBottomBar({ children }) {
                 sx={{ backgroundColor: 'transparent' }}
                 onChange={(_, value)=> router.push(`/${value}`)}
             >
-                <BottomNavigationAction disableRipple value={'vozsd'} icon={appSection == 'vozsd' ? <FormatQuoteOpen /> : <FormatQuoteOpenOutline />}
-                    color={appSection == 'vozsd' ? '#33333' : theme.palette.text.secondary} 
-                />
+                <BottomNavigationAction disableRipple value={''} icon={<Bookshelf />} />
                 <BottomNavigationAction disableRipple value={'grupos'} icon={<Isotype variant={appSection == 'grupos' ? 'default' : 'outline'}
                     color={appSection == 'grupos' ? theme.palette.primary.main : theme.palette.text.secondary} />}
                 />
-                <BottomNavigationAction disableRipple value={''} icon={<InformationVariant />} />
+                <BottomNavigationAction disableRipple value={account ? 'yo' : 'auth'} icon={<AccountCircleOutlinedIcon />} />
             </BottomNavigation>
         </Paper>
     );

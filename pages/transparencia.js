@@ -7,7 +7,7 @@ function Home() {
 
   return (
     <div >
-      <Typography variant="h1">Socialdemócratas de Chile</Typography>
+      <Typography variant="h1">SDCL | Transparencia</Typography>
     </div>
   )
 }

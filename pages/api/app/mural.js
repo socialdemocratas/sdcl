@@ -12,6 +12,12 @@ export default function handler(req, res) {
         type: 'TERRITORIAL/REGIONAL',
         group: 'Regional Metropolitano'
     }, {
+        id: 600,
+        title: 'Aniversario Comunal',
+        abstract: 'Hola! recuerden que este mes es el aniversario de la comuna. ¿Qué actividades podemos hacer?',
+        type: 'TERRITORIAL/COMUNAL',
+        group: 'Comunal San Miguel'
+    }, {
         id: 565,
         title: 'Minuta reunión 01/11',
         abstract: 'Resumen de la reunón general',
