@@ -34,7 +34,7 @@ export default function Tabs_({ }) {
 
   const router = useRouter();
   const pathnameSplit = router.pathname.split('/')
-  const homeSection = pathnameSplit[1] || "";
+  const homeSection = pathnameSplit[2] || "";
   const theme = useTheme();
 
   console.log('groupsSection', )
