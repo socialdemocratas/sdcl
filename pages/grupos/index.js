@@ -5,6 +5,8 @@ import {
   Container,
   Card,
   CardContent,
+  Button,
+  Toolbar,
   Box
 } from "@mui/material"
 //import Masonry from '../../components/Masonry'
@@ -25,10 +27,13 @@ function Home() {
   return (
     <Container>
       <Typography variant="h1" sx={{textAlign: 'center'}}>Mural SD</Typography>
-      <Typography variant="caption">Espacio abierto para informarnos</Typography>
+      <Typography variant="caption" sx={{textAlign: 'center'}}>Espacio abierto para informarnos</Typography>
+      <Paper sx={{ position: 'fixed', bottom: 110, left: -5 }} elevation={1}>
+        <Button variant="container" sx={{textTransform: 'none'}}>Todas mis afiliaciones</Button>
+      </Paper>
       <Masonry columns={2} spacing={2}>
         {data.map(item => (
-          <Paper key={item.id}>
+          <Paper key={item.id} elevation={0} sx={{background: '#F3FFFF'}}>
             <Box p={.5}>
               <Typography variant="caption">{item.group}</Typography>
               <Typography variant="h6">{item.title}</Typography>
