@@ -23,7 +23,7 @@ function Home() {
 
   return (
     <Container>
-      <Typography variant="h1">Socialdemócratas de Chile</Typography>
+      <Typography variant="h1">Crea una cuenta como...</Typography>
       <Stack spacing={2}>
 
         <Card variant="outlined">
@@ -36,9 +36,10 @@ function Home() {
               name="create_account_option"
               inputProps={{ 'aria-label': 'Como Socialdemocrata Militante' }}
             />
-            <Typography variant="h6">Como socialdemócrata militante</Typography>
+            <Typography variant="h6">Socialdemócrata militante</Typography>
           </Box>
-          <Typography>Sé parte de nuestro partido</Typography>
+          <Typography>Sé parte de nuestro partido.</Typography>
+          <Button variant="outlined" size="small">Más Información</Button>
           </CardContent>
         </Card>
 
@@ -52,9 +53,10 @@ function Home() {
               name="create_account_option"
               inputProps={{ 'aria-label': 'Como Socialdemocrata NO Militante' }}
             />
-            <Typography variant="h6">Como socialdemócrata no militante</Typography>
+            <Typography variant="h6">Socialdemócrata no militante</Typography>
           </Box>
-          <Typography>Declaras ser socialdemócrata pero no deseas ser parte de nuestro partido</Typography>
+          <Typography>Declaras ser socialdemócrata pero no deseas ser parte de nuestro partido.</Typography>
+          <Button variant="outlined" size="small">Más Información</Button>
           </CardContent>
         </Card>
 
@@ -70,10 +72,13 @@ function Home() {
               />
               <Typography variant="h6">Solo crear una cuenta</Typography>
             </Box>
-            <Typography>No declaras tu afinidad política a la socialdemocracia, solo necesitas crear una cuenta para usar los servicios del sitio</Typography>
+            <Typography>No declaras tu afinidad política a la socialdemocracia. Si solo necesitas 
+              crear una cuenta para usar algunos servicios, comentar o curiosear.</Typography>
+            <Button variant="outlined" size="small">Más Información</Button>
           </CardContent>
         </Card>
 
+        <Typography variant="body2">Puedes cambiar de opinión más adelante.</Typography>
         <Button>Continuar</Button>
 
       </Stack>
@@ -86,6 +91,7 @@ Home.getLayout = (page) =>
   <Layout 
     title="Unirme"
     tabs={<Tabs />}
+    sx={{ marginBottom: '108px' }}
   >
     {page}
   </Layout>

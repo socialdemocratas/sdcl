@@ -2,6 +2,7 @@ import * as React from 'react';
 import Isotype from './Isotype'
 import { 
     Paper,
+    Box,
     BottomNavigation,
     BottomNavigationAction
 } from '@mui/material';
@@ -26,6 +27,8 @@ export default function MobileBottomBar({ children }) {
         appSection = ''
     }
     return (
+        <>
+        <Box height='110px'></Box>
         <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, backgroundColor: theme.palette.bg.main }} elevation={1}>
             {children}
             <BottomNavigation
@@ -41,6 +44,7 @@ export default function MobileBottomBar({ children }) {
                 <BottomNavigationAction disableRipple value={account ? 'yo' : 'auth'} icon={<AccountCircleOutlinedIcon />} />
             </BottomNavigation>
         </Paper>
+        </>
     );
 }
 

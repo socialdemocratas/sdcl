@@ -1,43 +1,45 @@
-import { useEffect  } from "react"
+import { useEffect, useRef, useState  } from "react"
 import { 
   Typography,
-  Paper
+  Paper,
+  Container,
+  Card,
+  CardContent,
+  Box
 } from "@mui/material"
-import Masonry from '@mui/lab/Masonry'
+//import Masonry from '../../components/Masonry'
 import Layout from "../../components/Layout"
+import Masonry from "@mui/lab/Masonry"
 import Tabs from "../../components/SDCLMobileTabs"
 import useSWR from 'swr'
-
-
-import {AutoSizer, Table} from 'react-virtualized'
+import Image from 'next/image'
 
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 function Home() {
-
   const { data, error } = useSWR('/api/app/mural', fetcher)
 
   if (error) return <div>Failed to load</div>
   if (!data) return <div>Cargando...</div>
 
   return (
-    <div >
+    <Container>
       <Typography variant="h1">Mural SD</Typography>
-      <AutoSizer>
-  {({ height, width }) => (
-    <Table
-      headerHeight={30}
-      height={height}
-      rowCount={2}
-      rowGetter={({ index }) => data[index]}
-      rowHeight={({ index }) => 50}
-      width={width}
-    >
-    </Table>
-  )}
-</AutoSizer>
-
-    </div>
+      <Masonry columns={2} spacing={2}>
+        {data.map(item => (
+          <Paper key={item.id}>
+            <Box p={.5}>
+              <Typography variant="caption">{item.group}</Typography>
+              <Typography variant="h6">{item.title}</Typography>
+              <Typography variant="body1">{item.abstract}</Typography>
+            </Box>
+            {
+              item.image && <img style={{width: '100%'}} src={item.image} />
+            }
+          </Paper>
+        ))}
+      </Masonry>
+    </Container>
   )
 }
 
@@ -52,12 +54,5 @@ Home.getLayout = (page) =>
 export default Home;
 
 /**
- <Masonry columns={2} spacing={2}>
-        {data.map(item => (
-          <Paper key={item.id}>
-            <Typography>{item.title}</Typography>
-            <Typography>{item.abstract}</Typography>
-          </Paper>
-        ))}
-      </Masonry>
+ 
  */

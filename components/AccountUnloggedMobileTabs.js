@@ -53,7 +53,7 @@ export default function Tabs_({ }) {
           borderRadius: '50px'
         }
       }}
-      onChange={(_, value)=> router.push(`/${value}`)}
+      onChange={(_, value)=> router.push(`/auth/${value}`)}
       aria-label="icon position tabs example"
     >
         <StyledTab value="" icon={

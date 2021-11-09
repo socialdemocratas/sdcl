@@ -44,7 +44,7 @@ export default function Layout({ title, tabs, children }) {
     <CssBaseline />
     <Box>
       <ThemeProvider theme={theme}>
-        <Header title={title} />
+      { !isSmall && <Header title={title} /> }
         {children}
         {isSmall && <MobileBottomBar>{tabs}</MobileBottomBar>}
       </ThemeProvider>
