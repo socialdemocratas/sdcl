@@ -24,7 +24,8 @@ function Home() {
 
   return (
     <Container>
-      <Typography variant="h1">Mural SD</Typography>
+      <Typography variant="h1" sx={{textAlign: 'center'}}>Mural SD</Typography>
+      <Typography variant="caption">Espacio abierto para informarnos</Typography>
       <Masonry columns={2} spacing={2}>
         {data.map(item => (
           <Paper key={item.id}>
