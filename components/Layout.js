@@ -5,7 +5,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import Head from 'next/head'
 import Header from './Header'
-import MobileBottomBar from './MobileBottomBar';
+import MobileBottomBar from './MobileBottomBar2';
 import React from 'react';
 
 const theme = responsiveFontSizes(createTheme({
@@ -39,6 +39,10 @@ export default function Layout({ title, tabs, children }) {
       <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Inter:wght@300;400;500;700&display=swap"
       />
     </Head>
     <CssBaseline />

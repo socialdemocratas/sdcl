@@ -15,7 +15,11 @@ import {
     mdiNotebook,
     mdiNotebookOutline,
     mdiAccountPlus,
-    mdiAccountPlusOutline
+    mdiAccountPlusOutline,
+    mdiBullhorn,
+    mdiBullhornOutline,
+    mdiNewspaperVariant,
+    mdiNewspaperVariantOutline
 } from '@mdi/js';
 
 import { createSvgIcon } from '@mui/material/utils';
@@ -35,3 +39,7 @@ export const Notebook = createSvgIcon(<path d={mdiNotebook} />, 'Notebook');
 export const NotebookOutline = createSvgIcon(<path d={mdiNotebookOutline} />, 'NotebookOutline');
 export const AccountPlus = createSvgIcon(<path d={mdiAccountPlus} />, 'AccountPlus');
 export const AccountPlusOutline = createSvgIcon(<path d={mdiAccountPlusOutline} />, 'AccountPlusOutline');
+export const Bullhorn = createSvgIcon(<path d={mdiBullhorn} />, 'Bullhorn');1
+export const BullhornOutline = createSvgIcon(<path d={mdiBullhornOutline} />, 'BullhornOutline');
+export const NewspaperVariant = createSvgIcon(<path d={mdiNewspaperVariant} />, 'NewspaperVariant');
+export const NewspaperVariantOutline = createSvgIcon(<path d={mdiNewspaperVariantOutline} />, 'NewspaperVariantOutline');

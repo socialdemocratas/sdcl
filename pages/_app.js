@@ -5,7 +5,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { createTheme, ThemeProvider, styled, responsiveFontSizes, useTheme } from '@mui/material/styles';
 import Head from 'next/head'
 import Header from '../components/Header'
-import MobileBottomBar from '../components/MobileBottomBar';
+import MobileBottomBar from '../components/MobileBottomBar2';
 import React from 'react';
 
 const theme = responsiveFontSizes(createTheme({

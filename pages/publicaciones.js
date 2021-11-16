@@ -15,11 +15,13 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import CreateIcon from '@mui/icons-material/Create';
 
 //import Masonry from '../../components/Masonry'
-import Layout from "../../components/Layout"
+import Layout from "../components/Layout"
 import Masonry from "@mui/lab/Masonry"
-import Tabs from "../../components/SDCLMobileTabs"
+import Tabs from "../components/SDCLMobileTab2"
 import useSWR from 'swr'
 import Image from 'next/image'
+
+import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
 
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
@@ -42,20 +44,25 @@ function Home() {
   if (!data) return <div>Cargando...</div>
 
   return (
-    <Container>
-      <Typography variant="h1" sx={{textAlign: 'center', mt: 2 }}>Mural SD</Typography>
+    <Container sx={{ pr: 0 }}>
+      <Typography variant="h1" sx={{textAlign: 'center', mt: 2 }}>Plaza</Typography>
 
-      <Box
+      {false && <Box
       marginTop={3}
       marginBottom={4}
       textAlign='center'
       >
-      {mockSpaces.map(item => 
-      <Chip key={item.id} label={item.name} sx={{m:.5}} sx={{  backgroundColor: item.id == spaceSelectedId ? item.color: 'inherit'}}
-      variant={spaceSelectedId != item.id ? 'outlined' : ''}
-      onClick={handleSpaceSelect} />
-      )}
-      </Box>
+        {mockSpaces.map(item => 
+        <Chip key={item.id} label={item.name} sx={{m:.5}} sx={{  backgroundColor: item.id == spaceSelectedId ? item.color: 'inherit'}}
+        variant={spaceSelectedId != item.id ? 'outlined' : ''}
+        onClick={handleSpaceSelect} />
+        )}
+      </Box>}
+      <Toolbar sx={{ position: 'sticky', top: 0, backgroundColor: '#fff'}}>
+        <Button endIcon={<UnfoldMoreIcon />} fullWidth={true} sx={{ textTransform: 'none'}}>General</Button>
+      </Toolbar>
+
+      <Typography>#elecciones #directiva #fraudeFernando #idea</Typography>
 
       <Paper sx={{ position: 'fixed', bottom: 110, right: 10 }} elevation={1}>
         <Button variant="container" sx={{textTransform: 'none'}} startIcon={<CreateIcon />} size={'large'}>Agregar</Button>
@@ -65,7 +72,7 @@ function Home() {
           <Paper key={item.id} elevation={0} sx={{background: item.color}}>
             <Box p={.5}>
               <Typography variant="caption">{item.group}</Typography>
-              <Typography variant="h6">{item.title}</Typography>
+              <Typography variant="h6" sx={{ fontFamily: '"EB Garamond"'}}>{item.title}</Typography>
               <Typography variant="body1">{item.abstract}</Typography>
             </Box>
             {
