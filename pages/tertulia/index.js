@@ -40,16 +40,18 @@ const mockSpaces = [['Todos', '#F3FFFF'], ['Nacional', '#f5c8c3'], ['Mi Regional
 }))
 
 function Home() {
+
   const { data, error } = useSWR('/api/app/mural', fetcher)
 
   const [spaceSelectedId, setSpaceSelectedId] = useState(0);
+
+  if (error) return <div>Failed to load</div>
+  if (!data) return <div>Cargando...</div>
 
   const handleSpaceSelect = (event, value) => {
     console.log('handleSpaceSelect', event.target, value)
   }
 
-  if (error) return <div>Failed to load</div>
-  if (!data) return <div>Cargando...</div>
 
   return (
     <>

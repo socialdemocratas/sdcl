@@ -26,7 +26,7 @@ const theme = responsiveFontSizes(createTheme({
   },
 }), { factor: 2.5 });
 
-export default function Layout({ title, tabs, children }) {
+export default function Layout({ title, tabs, children, variant }) {
   const isSmall = useMediaQuery(theme.breakpoints.down('md'));
   console.log('tabs', tabs, isSmall)
   return <>
@@ -50,7 +50,7 @@ export default function Layout({ title, tabs, children }) {
       <ThemeProvider theme={theme}>
       { !isSmall && <Header title={title} /> }
         {children}
-        {isSmall && <MobileBottomBar>{tabs}</MobileBottomBar>}
+        { variant !== 'simple' && isSmall && <MobileBottomBar>{tabs}</MobileBottomBar>}
       </ThemeProvider>
     </Box>
   </>
