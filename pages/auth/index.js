@@ -72,7 +72,7 @@ function Home() {
               />
               <Typography variant="h6">Solo crear una cuenta</Typography>
             </Box>
-            <Typography>No declaras tu afinidad política a la socialdemocracia. Si solo necesitas 
+            <Typography>No declaras tu afinidad política a la socialdemocracia. Útil si solo necesitas 
               crear una cuenta para usar algunos servicios, comentar o curiosear.</Typography>
             <Button variant="outlined" size="small">Más Información</Button>
           </CardContent>

@@ -41,7 +41,7 @@ const mockSpaces = [['Todos', '#F3FFFF'], ['Nacional', '#f5c8c3'], ['Mi Regional
 
 function Home() {
 
-  const { data, error } = useSWR('/api/app/mural', fetcher)
+  const { data, error } = useSWR('/api/app/tertulias', fetcher)
 
   const [spaceSelectedId, setSpaceSelectedId] = useState(0);
 
@@ -79,14 +79,14 @@ function Home() {
 
       <List>
       <Virtuoso useWindowScroll _style={{ height: '400px' }} data={data} itemContent={(index, item) => {
-        return <Link href={`/tertulia/${item.id}_${item.title}`}>
-      <ListItem alignItems="flex-start" sx={{ borderLeftWidth: '5px', borderLeftStyle: 'solid', borderLeftColor: item.color }}>
-        <ListItemAvatar>
+        return <Link href={`/tertulia/${item.id}`}>
+      <ListItem alignItems="flex-start" sx={{  }}>
+        {item.user_name && <ListItemAvatar>
           <Avatar alt={item.user_name} src={item.user_pic} />
-        </ListItemAvatar>
+        </ListItemAvatar>}
         <ListItemText
           primaryTypographyProps={{ sx: { fontWeight: 500 } }}
-          primary={item.title}
+          primary={item.titulo}
           secondary={
             <React.Fragment>
               <Typography
@@ -95,9 +95,9 @@ function Home() {
                 variant="body2"
                 color="text.primary"
               >
-                {item.group}
+                {item.group || 'Nacional'}
               </Typography>
-              {" — " + item.abstract}
+              {" — " + item.texto}
               { item.image && <Box>
                 <img src={item.image} height="50" />
               </Box>}

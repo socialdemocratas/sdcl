@@ -59,7 +59,7 @@ function Home() {
         )}
       </Box>}
       <Toolbar sx={{ position: 'sticky', top: 0, backgroundColor: '#fff'}}>
-        <Button endIcon={<UnfoldMoreIcon />} fullWidth={true} sx={{ textTransform: 'none'}}>General</Button>
+        <Button endIcon={<UnfoldMoreIcon />} sx={{ textTransform: 'none'}}>General</Button>
       </Toolbar>
 
       <Typography>#elecciones #directiva #fraudeFernando #idea</Typography>

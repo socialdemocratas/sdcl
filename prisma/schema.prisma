@@ -1,0 +1,244 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Bitacora {
+  id               BigInt             @id @default(autoincrement())
+  fecha            DateTime
+  accion           String
+  descripcion      String
+  proceso          Proceso            @relation(fields: [procesoId], references: [id])
+  procesoId        BigInt
+  bitacoraPersona  BitacoraPersona[]
+  bitacoraOrganica BitacoraOrganica[]
+}
+
+model Pais {
+  isoCode     String    @id @db.Char(2)
+  nombre      String
+  nombreLocal String
+  personas    Persona[]
+}
+
+model Region {
+  id         Int      @id @default(autoincrement())
+  nombre     String
+  comunas    Comuna[]
+  organica   Organica @relation("regional", fields: [organicaId], references: [id])
+  organicaId BigInt   @unique
+}
+
+model Comuna {
+  id         Int       @id @default(autoincrement())
+  nombre     String
+  region     Region    @relation(fields: [regionId], references: [id])
+  regionId   Int
+  personas   Persona[]
+  organica   Organica  @relation("comunal", fields: [organicaId], references: [id])
+  organicaId BigInt    @unique
+}
+
+model Persona {
+  id                BigInt            @id @default(autoincrement())
+  nick              String            @unique
+  tieneNick         Boolean
+  rut               String            @unique // si no aplica se genera un string random
+  tieneRut          Boolean
+  email             String            @unique
+  claveEncriptada   String?
+  entropia          String
+  nacionalidad      Pais?             @relation(fields: [pais], references: [isoCode])
+  comuna            Comuna?           @relation(fields: [comunaId], references: [id])
+  nombreParaMostrar String?
+  nombres           String
+  apellidos         String
+  fechaNacimiento   DateTime
+  pais              String?           @db.Char(2)
+  membresias        Membresia[]       @relation("membresia")
+  comunaId          Int?
+  canales           Canal[]
+  tipoAfiliacion    TipoAfiliacion
+  bitacoraPersona   BitacoraPersona[]
+}
+
+model BitacoraPersona {
+  id         BigInt            @id @default(autoincrement())
+  persona    Persona           @relation(fields: [personaId], references: [id])
+  bitacora   Bitacora          @relation(fields: [bitacoraId], references: [id])
+  accion     TipoAccionPersona
+  comentario String
+  personaId  BigInt
+  bitacoraId BigInt
+}
+
+enum TipoAccionPersona {
+  CREAR_CUENTA
+  SOCIALDEMOCRATIZAR
+  SD_MILITANTEizar
+}
+
+model Canal {
+  id          Int       @id @default(autoincrement())
+  nombre      String    @unique
+  descripcion String
+  organica    Organica  @relation(fields: [organicaId], references: [id])
+  organicaId  BigInt
+  personas    Persona[]
+}
+
+model Organica {
+  id               BigInt             @id @default(autoincrement())
+  nombre           String             @unique
+  presentacion     String
+  tipo             TipoOrganica
+  roles            RolOrganica[]
+  miembrxs         Membresia[]
+  tramites         Procedimiento[]
+  regional         Region?            @relation("regional")
+  comunal          Comuna?            @relation("comunal")
+  canales          Canal[]
+  bitacoraOrganica BitacoraOrganica[]
+}
+
+model BitacoraOrganica {
+  id         BigInt             @id @default(autoincrement())
+  organica   Organica           @relation(fields: [organicaId], references: [id])
+  bitacora   Bitacora           @relation(fields: [bitacoraId], references: [id])
+  accion     TipoAccionOrganica
+  comentario String
+  organicaId BigInt
+  bitacoraId BigInt
+}
+
+enum TipoAccionOrganica {
+  CREAR
+  MODIFICAR
+}
+
+model Membresia {
+  id         BigInt        @id @default(autoincrement())
+  persona    Persona       @relation("membresia", fields: [personaId], references: [id])
+  Organica   Organica      @relation(fields: [organicaId], references: [id])
+  roles      RolOrganica[]
+  organicaId BigInt
+  personaId  BigInt
+
+  @@unique([organicaId, personaId])
+}
+
+model RolOrganica {
+  id         BigInt      @id @default(autoincrement())
+  nombre     String
+  organica   Organica    @relation(fields: [organicaId], references: [id])
+  miembrxs   Membresia[]
+  admin      Boolean
+  organicaId BigInt
+}
+
+model Procedimiento {
+  id         BigInt                 @id @default(autoincrement())
+  organica   Organica               @relation(references: [id], fields: [organicaId])
+  titulo     String
+  organicaId BigInt
+  versiones  ProcedimientoVersion[]
+}
+
+model ProcedimientoVersion {
+  id              BigInt        @id @default(autoincrement())
+  version         String
+  definicion      Json
+  procedimiento   Procedimiento @relation(fields: [procedimientoId], references: [id])
+  procedimientoId BigInt
+  procesos        Proceso[]
+}
+
+model Proceso {
+  id                     BigInt               @id @default(autoincrement())
+  procedimientoVersion   ProcedimientoVersion @relation(fields: [procedimientoVersionId], references: [id])
+  procedimientoVersionId BigInt
+  estado                 EstadoProceso
+  bitacoras              Bitacora[]
+}
+
+model Tertulia {
+  id                Int            @id @default(autoincrement())
+  titulo            String
+  texto             String
+  fechaCreacion     DateTime
+  fechaModificacion DateTime
+  fechaPublicacion  DateTime
+  estado            EstadoTertulia
+}
+
+model Votacion {
+  id                Int            @id @default(autoincrement())
+  titulo            String
+  texto             String
+  fechaCreacion     DateTime
+  fechaModificacion DateTime
+  fechaPublicacion  DateTime
+  estado            EstadoVotacion
+}
+
+model Evento {
+  id                Int          @id @default(autoincrement())
+  titulo            String
+  texto             String
+  fechaCreacion     DateTime
+  fechaModificacion DateTime
+  fechaPublicacion  DateTime
+  estado            EstadoEvento
+}
+
+enum TipoOrganica {
+  NACIONAL
+  REGIONAL
+  DISTRITAL
+  COMUNAL
+}
+
+enum EstadoTertulia {
+  BORRADOR
+  REVISION
+  PUBLICADA
+  PAPELERA
+  ELIMINADA
+}
+
+enum EstadoVotacion {
+  BORRADOR
+  REVISION
+  PUBLICADA
+  ACTIVADA
+  CERRADA
+}
+
+enum EstadoEvento {
+  BORRADOR
+  REVISION
+  PUBLICADA
+  ACTIVADA
+  CERRADA
+}
+
+enum TipoAfiliacion {
+  SOLO_CUENTA
+  SD_NO_MILITANTE
+  SD_MILITANTE
+}
+
+enum EstadoProceso {
+  BORRADOR
+  INICIADO
+  CADUCADO
+  COMPLETADO
+  ERROR
+}
